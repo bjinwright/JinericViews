@@ -1,0 +1,23 @@
+{% extends 'jinericviews/base.html' %}
+{% block extra_js %}
+{{block.super}}
+<script>
+	$(document).ready(function() {
+		$('th input.select-all').click(function() {
+			if ($(this).is(':checked')) {
+				$('.action-checkbox').attr('checked','checked')
+			} else {
+				$('.action-checkbox').removeAttr('checked')
+			}
+			
+		})
+	});
+</script>
+{% endblock %}
+{% block main_header %}{{main_header}}{% endblock %}
+{% block local_nav %}
+<ul class="local-nav">
+	<li class="first"><a href="/">Home</a></li>
+	<li>{{app_label|title}}</li>
+</ul>
+{% endblock %}
