@@ -1,0 +1,21 @@
+{% extends 'jinericviews/base.html' %}
+{% block main_header %}{{main_header|title}}{% endblock %}
+{% block main_col_class %}{% endblock %}
+{% block main_column %}
+<p>Are you sure you want to delete this?</p>
+<form action="{{request.path}}" method="post" class="uniForm" accept-charset="utf-8">
+	<p>
+		<input type="image" src="{{MEDIA_URL}}images/delete-btn.png" />
+		
+		<a href="{{read_no_page_view}}"><img src="{{MEDIA_URL}}images/cancel-btn.png" alt="Cancel"/></a>
+		
+	</p>
+</form>
+{% endblock %}
+{% block local_nav %}
+<ul class="local-nav">
+	<li class="first"><a href="/">Home</a></li>
+	<li><a href="{{read_no_page_view}}">{{app_label|title}}</a></li>
+	<li>{{action|title}}</li>
+</ul>
+{% endblock %}

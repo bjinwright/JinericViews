@@ -1,0 +1,25 @@
+{% load jineric_tags %}
+<div class="column filters left">
+						<div class="section">
+							<h2>Filters</h2>
+							{% for filter in list_filters %}
+							
+							
+							<h3 class="section-header">{{filter.verbose_name}}</h3>
+							<ul class="filter">
+								{% for i in filter.entries %}
+								<li {% if i.selected %}class="active"{% endif %}>
+									{% if i.selected %}
+									{{i.label}} <a class="small" href="{{request.path}}?{{selected_entries|remove_filter:i.url_var_value}}">(Remove)</a>
+									
+									{% else %}
+									<a  href="{{request.path}}?{{i.url_var}}={{i.value}}&{{selected_entries}}">{{i.label}}</a>
+									{% endif %}
+									
+									</li>
+								{% endfor %}
+							</ul>
+						
+							{% endfor %}
+							</div>
+						</div>

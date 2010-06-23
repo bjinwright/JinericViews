@@ -1,0 +1,43 @@
+JinericViews - Django class based generic views and admin for Google App Engine (GAE)
+This is not production ready as I have not included any tests. If you notice something is wrong drop me a note or fork.
+
+SAMPLE CUSTOMIZATION OF ADMIN CLASS
+from jinericviews.views.crud import JinericAdmin
+from jinericviews.actions import DeleteAction
+from jinericviews.filters import KeyFilter,BooleanFilter
+
+class MultimediaAdmin(JinericAdmin):
+    list_display = ('title','publish_status','featured')
+    list_filters = (BooleanFilter('publish_status','Publish Status'),BooleanFilter('featured','Featured'))
+    login_required = True
+    paginate_by = 10
+    post_create_append_key = False
+    post_update_append_key = False
+    actions = [DeleteAction,FeatureAction,UnFeatureAction,PublishAction,UnPublishAction] 
+
+SAMPLE VIEWS
+#Channel Views
+ca = MultimediaAdmin(Channel) #Channel is a GAE model
+ca.form_class = ChannelForm #You guessed it ChannelForm is a Django form this is required polymodels
+
+#Playlist Views
+pa = MultimediaAdmin(Playlist)
+pa.form_class = PlaylistForm
+pa.list_filters = pa.list_filters + (KeyFilter('channel','Channel'),)
+
+#Media Views
+ma = MultimediaAdmin(Media)
+ma.list_display = ma.list_display
+ma.form_class = MediaForm
+ma.list_filters = ma.list_filters + (KeyFilter('playlist_list','Playlist'),)
+
+SAMPLE URL CONFIGURATION
+from django.conf.urls.defaults import *
+from multimedia.views import ca, pa, ma
+
+urlpatterns = patterns('',
+    url(r'^', include(ca.urls)),
+    url(r'^', include(pa.urls)),
+    url(r'^', include(ma.urls)),
+)
+

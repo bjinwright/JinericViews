@@ -1,0 +1,5 @@
+.uniForm .inlineLabels .textInput, .uniForm .inlineLabels .fileUpload, .uniForm .inlineLabels .selectInput, .uniForm .inlineLabels select, .uniForm .inlineLabels textarea {height:25px;float:left;width:55%;margin:0;background:#fff;border:1px solid #AAA;padding:5px;font-size:16px;}
+.uniForm .ctrlHolder, .uniForm .buttonHolder {clear:both;margin:0px;padding:10px 0px;}
+p.errorField {padding-left:10px;}
+.uniForm .inlineLabels label, .uniForm .inlineLabels .label {padding-left:10px;}
+.uniForm .inlineLabels select.selectmultiple,.uniForm .inlineLabels textarea.textarea {height:auto;}

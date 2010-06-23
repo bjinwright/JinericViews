@@ -1,0 +1,28 @@
+{% extends 'jinericviews/base.html' %}
+{% load uni_form_tags jineric_tags %}
+{% block extra_css %}{% include "jinericviews/uni_form/includes-css.html" %}{% endblock %}
+{% block extra_js_bottom %}{% include "jinericviews/uni_form/includes-js.html" %}{% endblock %}
+{% block main_header %}{{main_header|title}}{% endblock %}
+{% block main_col_class %}{% endblock %}
+{% block main_column %}
+<ul>{% for i in recs %}
+<li>{{i}}</li>
+{% endfor %}</ul>
+
+<form action="{{form_action}}" method="post" class="uniForm" accept-charset="utf-8">
+	<fieldset class="inlineLabels">{{action_form|as_uni_form}}</fieldset>
+	<p>
+		<input type="image" src="{{MEDIA_URL}}images/save-btn.png" />
+		{% ifequal action 'update' %}
+		<a href="{{delete_view|template_reverse:i}}"><img src="{{MEDIA_URL}}images/delete-btn.png" alt="Delete"/></a>
+		{% endifequal %}
+	</p>
+</form>
+{% endblock %}
+{% block local_nav %}
+<ul class="local-nav">
+	<li class="first"><a href="/">Home</a></li>
+	<li><a href="{{read_no_page_view}}">{{model_kind|title}}</a></li>
+	<li>{{action|title}}</li>
+</ul>
+{% endblock %}
